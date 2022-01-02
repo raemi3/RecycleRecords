@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Recycle Records - Edit Profile</title>
+        <link rel="icon" type="image/x-icon" href="assets/vinyl_test.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+		<!-- shopping cart -->
+		<a sec:authorize="hasAuthority('buyer')" href = "/shoppingcart">
+			<img class="cart" src="assets/shopping_cart.png" alt="shop_cart"/>
+		</a>
+        <header>
+            <h1 class="site-heading text-center text-faded d-none d-lg-block">
+                <span class="site-heading-lower">Recycle Records</span>
+            </h1>
+        </header>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="/">Recycle Records</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/about">About</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/vinyl">Vinyl</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/joinin">Join In</a></li>
+                        <li class="nav-item px-lg-4" sec:authorize="hasAuthority('buyer')"><a class="nav-link text-uppercase" href="/buyerprofile">Profile</a></li>
+						<li class="nav-item px-lg-4" sec:authorize="hasAuthority('seller')"><a class="nav-link text-uppercase" href="/sellerprofile">Profile</a></li>                        
+                        <li class="nav-item px-lg-4"><form th:action="@{/logout}" method="post"><button class="nav-link text-uppercase" type="sumbit" value="logout">Logout</button></form></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		
+		<section class="page-section cta">
+            <div class="container">
+                <div class="row">
+				
+						<!-- Account Details -->
+							<div class="col-xl-9 mx-auto">
+								<div class="cta-inner bg-faded text-center rounded">
+									<h2 class="section-heading mb-5">
+										<!--<span class="section-heading-upper">Come On In</span>-->
+										<span class="section-heading-lower">Edit Account Details</span>
+									</h2>
+									<form th:action="@{/buyerprofileedit}" method="post" th:object="${users}">
+									<ul class="list-unstyled list-hours mb-3 text-left mx-auto">
+										<li>
+											<input type="hidden" th:field="*{user_id}"/>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											First Name:
+											<span class="ms-auto"><input type="text" th:field="*{f_name}" name="fname" size="20" maxlength="20"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Last Name:
+											<span class="ms-auto"><input type="text" th:field="*{l_name}" name="sname" size="20" maxlength="20"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Phone
+											<span class="ms-auto"><input type="text" th:field="*{phone}" name="phone" size="20" maxlength="20"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Address Line 1:
+											<span class="ms-auto"><input type="text" th:field="*{address1}" name="add1" size="20" maxlength="30"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Address Line 2:
+											<span class="ms-auto"><input type="text" th:field="*{address2}" name="add2" size="20" maxlength="30"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Town:
+											<span class="ms-auto"><input type="text" th:field="*{town}" name="town" size="20" maxlength="20"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											County:
+											<span class="ms-auto">
+											<select class="dropdown rounded" th:field="*{county}" name="county">
+													<option value="Blank">  </option>
+													<option value="Carlow">Carlow</option>
+													<option value="Cavan">Cavan</option>
+													<option value="Clare">Clare</option>
+													<option value="Cork">Cork</option>
+													<option value="Donegal">Donegal</option>
+													<option value="Dublin">Dublin</option>
+													<option value="Galway">Galway</option>
+													<option value="Kerry">Kerry</option>
+													<option value="Kildare">Kildare</option>
+													<option value="Kilkenny">Kilkenny</option>
+													<option value="Laois">Laois</option>
+													<option value="Leitrim">Leitrim</option>
+													<option value="Limerick">Limerick</option>
+													<option value="Longford">Longford</option>
+													<option value="Louth">Louth</option>
+													<option value="Mayo">Mayo</option>
+													<option value="Meath">Meath</option>
+													<option value="Monaghan">Monaghan</option>
+													<option value="Offaly">Offaly</option>
+													<option value="Roscommon">Rosscommon</option>
+													<option value="Sligo">Sligo</option>
+													<option value="Tipperary">Tipperary</option>
+													<option value="Waterford">Waterford</option>
+													<option value="Westmeath">Westmeath</option>
+													<option value="Wexford">Wexford</option>
+													<option value="Wicklow">Wicklow</option>
+											</select>
+											</span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Eircode:
+											<span class="ms-auto"><input type="text" th:field="*{eircode}" name="eircode" size="20" maxlength="20"/></span>
+										</li>
+										<li class="list-unstyled-item list-hours-item d-flex">
+											Password:
+											<span class="ms-auto"><input type="password" th:field="*{pass_word}" name="password" size="20" maxlength="20"/></span>
+										</li>
+										</ul>
+										<input class="btn btn-primary btn-xl" type="submit" value="Update"/>
+										<a class="btn btn-primary btn-xl" href="/buyerprofile">Cancel</a>
+									</form>
+									
+								</div>
+							</div>
+							
+					</div>
+                </div>
+            </div>
+        </section>
+		
+        <section class="page-section about-heading">
+            <div class="container">
+                <!-- free space between the main & footer -->
+            </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Copyright &copy; Recycle Records 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
